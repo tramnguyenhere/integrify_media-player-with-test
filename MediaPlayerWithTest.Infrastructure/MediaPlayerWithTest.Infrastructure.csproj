@@ -1,5 +1,11 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+  <ItemGroup>
+    <ProjectReference Include="..\MediaPlayerWithTest.Domain\MediaPlayerWithTest.Domain.csproj" />
+    <ProjectReference Include="..\MediaPlayerWithTest.Business\MediaPlayerWithTest.Business.csproj" />
+    <ProjectReference Include="..\MediaPlayerWithTest.Application\MediaPlayerWithTest.Application.csproj" />
+  </ItemGroup>
+
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
