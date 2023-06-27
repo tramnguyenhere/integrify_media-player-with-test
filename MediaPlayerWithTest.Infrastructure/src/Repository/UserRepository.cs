@@ -9,7 +9,7 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
 {
     public class UserRepository : IUserRepository
     {
-        public UserRepository(){}
+        public UserRepository() { }
 
         public void AddNewList(string name, int userId)
         {
@@ -40,6 +40,5 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
         {
             throw new NotImplementedException();
         }
-
     }
 }

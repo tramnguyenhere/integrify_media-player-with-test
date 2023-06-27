@@ -1,3 +1,4 @@
+using System;
 using MediaPlayerWithTest.src.Business;
 using MediaPlayerWithTest.src.Domain.Core;
 using MediaPlayerWithTest.src.Domain.RepositoryInterface;
@@ -8,13 +9,11 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
     {
         private readonly List<PlayList> _playlistRepository;
         private readonly List<MediaFile> _mediaFiles;
-        private readonly List<User> _userRepository;
 
-        public PlayListRepository(List<MediaFile> mediaFiles, List<User> usersRepository)
+        public PlayListRepository(List<MediaFile> mediaFiles)
         {
             _playlistRepository = new();
             _mediaFiles = mediaFiles;
-            _userRepository = usersRepository;
         }
 
         public PlayList AddNewFile(int playListId, int fileId, int userId)

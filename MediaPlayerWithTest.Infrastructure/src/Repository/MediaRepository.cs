@@ -1,3 +1,4 @@
+using System;
 using MediaPlayerWithTest.src.Business;
 using MediaPlayerWithTest.src.Domain.Core;
 using MediaPlayerWithTest.src.Domain.RepositoryInterface;
@@ -8,9 +9,11 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
     {
         private readonly List<MediaFile> _mediaFiles;
 
-        public MediaRepository() {
+        public MediaRepository()
+        {
             _mediaFiles = new();
         }
+
         public MediaFile CreateNewFile(string fileName, string filePath, TimeSpan duration)
         {
             var newMediaFile = new MediaFile(fileName, filePath, duration);
@@ -23,10 +26,13 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
         {
             var toBeDeletedMedia = _mediaFiles.FirstOrDefault(file => file.GetId == fileId);
 
-            if(toBeDeletedMedia != null) {
+            if (toBeDeletedMedia != null)
+            {
                 _mediaFiles.Remove(toBeDeletedMedia);
-                return true; 
-            } else {
+                return true;
+            }
+            else
+            {
                 ErrorHandler.HandleFileNotFound();
                 return false;
             }
@@ -41,9 +47,12 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
         {
             var media = _mediaFiles.FirstOrDefault(file => file.GetId == fileId);
 
-            if(media != null) {
+            if (media != null)
+            {
                 return media;
-            } else {
+            }
+            else
+            {
                 throw new FileNotFoundException("Media file not found");
             }
         }
@@ -59,7 +68,7 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
             else
             {
                 ErrorHandler.HandleFileNotFound();
-            }   
+            }
         }
 
         public void Play(int fileId)
