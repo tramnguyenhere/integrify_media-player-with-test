@@ -1,26 +1,86 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MediaPlayerWithTest.src.Business;
+using MediaPlayerWithTest.src.Domain.Core;
 using MediaPlayerWithTest.src.Domain.RepositoryInterface;
 
 namespace MediaPlayerWithTest.src.Infrastructure.Repository
 {
     public class PlayListRepository : IPlayListRepository
     {
-        public void AddNewFile(int playListId, int fileId, int userId)
+        private readonly List<PlayList> _playlistRepository;
+        private readonly List<MediaFile> _mediaFiles;
+        private readonly List<User> _userRepository;
+
+        public PlayListRepository(List<MediaFile> mediaFiles, List<User> usersRepository)
         {
-            throw new NotImplementedException();
+            _playlistRepository = new();
+            _mediaFiles = mediaFiles;
+            _userRepository = usersRepository;
         }
 
-        public void EmptyList(int playListId, int userId)
+        public PlayList AddNewFile(int playListId, int fileId, int userId)
         {
-            throw new NotImplementedException();
+            var playlist = _playlistRepository.FirstOrDefault(p => p.GetId == playListId);
+
+            if (playlist != null)
+            {
+                var mediaFile = _mediaFiles.FirstOrDefault(f => f.GetId == fileId);
+
+                if (mediaFile != null)
+                {
+                    playlist.AddNewFile(mediaFile, userId);
+                    return playlist;
+                }
+                else
+                {
+                    throw new FileNotFoundException("Media file not found.");
+                }
+            }
+            else
+            {
+                throw new FileNotFoundException("Playlist not found.");
+            }
         }
 
-        public void RemoveFile(int playListId, int fileId, int userId)
+        public bool EmptyList(int playListId, int userId)
         {
-            throw new NotImplementedException();
+            var playlist = _playlistRepository.FirstOrDefault(p => p.GetId == playListId);
+
+            if (playlist != null)
+            {
+                playlist.EmptyList(userId);
+                return true;
+            }
+            else
+            {
+                ErrorHandler.HandleFileNotFound();
+                return false;
+            }
+        }
+
+        public bool RemoveFile(int playListId, int fileId, int userId)
+        {
+            var playlist = _playlistRepository.FirstOrDefault(p => p.GetId == playListId);
+
+            if (playlist != null)
+            {
+                var mediaFile = _mediaFiles.FirstOrDefault(f => f.GetId == fileId);
+
+                if (mediaFile != null)
+                {
+                    playlist.RemoveFile(mediaFile, userId);
+                    return true;
+                }
+                else
+                {
+                    ErrorHandler.HandleFileNotFound();
+                    return false;
+                }
+            }
+            else
+            {
+                ErrorHandler.HandleFileNotFound();
+                return false;
+            }
         }
     }
 }
