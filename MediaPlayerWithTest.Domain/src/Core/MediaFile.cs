@@ -12,10 +12,7 @@ namespace MediaPlayerWithTest.src.Domain.Core
         public TimeSpan Duration { get; set; }
         public double Speed
         {
-            get
-            {
-                return _playbackSpeed;
-            }
+            get { return _playbackSpeed; }
             set
             {
                 if (IsValidPlaybackSpeed(value))
@@ -30,6 +27,15 @@ namespace MediaPlayerWithTest.src.Domain.Core
                     throw new ArgumentException("Not a valid speed value");
                 }
             }
+        }
+
+        public bool IsPlaying
+        {
+            get { return _isPlaying; }
+        }
+        public TimeSpan CurrentPosition
+        {
+            get { return _currentPosition; }
         }
 
         public MediaFile(string fileName, string filePath, TimeSpan duration, double speed = 1)
@@ -98,7 +104,8 @@ namespace MediaPlayerWithTest.src.Domain.Core
             }
         }
 
-        public override string ToString() {
+        public override string ToString()
+        {
             return $"Name: {FileName}, Path: {FilePath}, Duration: {Duration}";
         }
     }
