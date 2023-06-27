@@ -1,3 +1,5 @@
+using MediaPlayerWithTest.src.Domain.Core;
+
 namespace MediaPlayerWithTest.src.Business.ServiceInterface
 {
     public interface IMediaService

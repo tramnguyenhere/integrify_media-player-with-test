@@ -1,31 +1,51 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using MediaPlayerWithTest.src.Business;
+using MediaPlayerWithTest.src.Domain.Core;
 using MediaPlayerWithTest.src.Domain.RepositoryInterface;
 
 namespace MediaPlayerWithTest.src.Infrastructure.Repository
 {
     public class MediaRepository : IMediaRepository
     {
-        public void CreateNewFile(string fileName, string filePath, TimeSpan duration)
+        private readonly List<MediaFile> _mediaFiles;
+
+        public MediaRepository() {
+            _mediaFiles = new();
+        }
+        public MediaFile CreateNewFile(string fileName, string filePath, TimeSpan duration)
         {
-            throw new NotImplementedException();
+            var newMediaFile = new MediaFile(fileName, filePath, duration);
+            _mediaFiles.Add(newMediaFile);
+
+            return newMediaFile;
         }
 
-        public void DeleteFileById(int fileId)
+        public bool DeleteFileById(int fileId)
         {
-            throw new NotImplementedException();
+            var toBeDeletedMedia = _mediaFiles.FirstOrDefault(file => file.GetId == fileId);
+
+            if(toBeDeletedMedia != null) {
+                _mediaFiles.Remove(toBeDeletedMedia);
+                return true; 
+            } else {
+                ErrorHandler.HandleErrorInDatabase("Media file not found in database");
+                return false;
+            }
         }
 
-        public void GetAllFiles()
+        public List<MediaFile> GetAllFiles()
         {
-            throw new NotImplementedException();
+            return _mediaFiles;
         }
 
-        public void GetFileById(int fileId)
+        public MediaFile GetFileById(int fileId)
         {
-            throw new NotImplementedException();
+            var media = _mediaFiles.FirstOrDefault(file => file.GetId == fileId);
+
+            if(media != null) {
+                return media;
+            } else {
+                throw new Exception("Media file not found");
+            }
         }
 
         public void Pause(int fileId)

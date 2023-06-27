@@ -1,6 +1,6 @@
 namespace MediaPlayerWithTest.src.Domain.Core
 {
-    public abstract class MediaFile : BaseEntity
+    public class MediaFile : BaseEntity
     {
         private double _playbackSpeed;
         private bool _isPlaying;
@@ -32,7 +32,7 @@ namespace MediaPlayerWithTest.src.Domain.Core
             }
         }
 
-        public MediaFile(string fileName, string filePath, TimeSpan duration, double speed)
+        public MediaFile(string fileName, string filePath, TimeSpan duration, double speed = 1)
         {
             FileName = fileName;
             FilePath = filePath;
@@ -96,6 +96,10 @@ namespace MediaPlayerWithTest.src.Domain.Core
                     Stop();
                 }
             }
+        }
+
+        public override string ToString() {
+            return $"Name: {FileName}, Path: {FilePath}, Duration: {Duration}";
         }
     }
 }
