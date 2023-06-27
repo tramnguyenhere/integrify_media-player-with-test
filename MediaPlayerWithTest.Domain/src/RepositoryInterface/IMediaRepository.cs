@@ -1,4 +1,5 @@
 using MediaPlayerWithTest.src.Domain.Core;
+using System;
 
 namespace MediaPlayerWithTest.src.Domain.RepositoryInterface
 {
