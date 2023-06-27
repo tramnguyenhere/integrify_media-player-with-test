@@ -27,7 +27,7 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
                 _mediaFiles.Remove(toBeDeletedMedia);
                 return true; 
             } else {
-                ErrorHandler.HandleErrorInDatabase("Media file not found in database");
+                ErrorHandler.HandleFileNotFound();
                 return false;
             }
         }
@@ -44,23 +44,50 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
             if(media != null) {
                 return media;
             } else {
-                throw new Exception("Media file not found");
+                throw new FileNotFoundException("Media file not found");
             }
         }
 
         public void Pause(int fileId)
         {
-            throw new NotImplementedException();
+            var mediaFile = _mediaFiles.FirstOrDefault(file => file.GetId == fileId);
+
+            if (mediaFile != null)
+            {
+                mediaFile.Pause();
+            }
+            else
+            {
+                ErrorHandler.HandleFileNotFound();
+            }   
         }
 
         public void Play(int fileId)
         {
-            throw new NotImplementedException();
+            var mediaFile = _mediaFiles.FirstOrDefault(file => file.GetId == fileId);
+
+            if (mediaFile != null)
+            {
+                mediaFile.Play();
+            }
+            else
+            {
+                ErrorHandler.HandleFileNotFound();
+            }
         }
 
         public void Stop(int fileId)
         {
-            throw new NotImplementedException();
+            var mediaFile = _mediaFiles.FirstOrDefault(file => file.GetId == fileId);
+
+            if (mediaFile != null)
+            {
+                mediaFile.Stop();
+            }
+            else
+            {
+                ErrorHandler.HandleFileNotFound();
+            }
         }
     }
 }

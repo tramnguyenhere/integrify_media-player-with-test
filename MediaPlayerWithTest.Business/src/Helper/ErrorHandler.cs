@@ -13,5 +13,10 @@ namespace MediaPlayerWithTest.src.Business
         {
             throw new DataException(message);
         }
+
+        public static Exception HandleFileNotFound(string message = "File not found")
+        {
+            throw new FileNotFoundException(message);
+        }
     }
 }
