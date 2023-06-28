@@ -12,6 +12,7 @@ namespace MediaPlayerWithTest.Tests.src.Domain.Tests
                 "/path/to/file.mp3",
                 TimeSpan.FromSeconds(120)
             );
+
             testFile.Play();
 
             Assert.True(testFile.IsPlaying);
@@ -25,6 +26,7 @@ namespace MediaPlayerWithTest.Tests.src.Domain.Tests
                 "/path/to/file.mp3",
                 TimeSpan.FromSeconds(120)
             );
+
             testFile.Pause();
 
             Assert.False(testFile.IsPlaying);
@@ -38,6 +40,7 @@ namespace MediaPlayerWithTest.Tests.src.Domain.Tests
                 "/path/to/file.mp3",
                 TimeSpan.FromSeconds(120)
             );
+
             testFile.Stop();
 
             Assert.False(testFile.IsPlaying);
@@ -52,8 +55,8 @@ namespace MediaPlayerWithTest.Tests.src.Domain.Tests
                 "/path/to/file.mp3",
                 TimeSpan.FromSeconds(120)
             );
-            testFile.Play();
 
+            testFile.Play();
             testFile.Speed = 1.5;
 
             Assert.Equal(1.5, testFile.Speed);

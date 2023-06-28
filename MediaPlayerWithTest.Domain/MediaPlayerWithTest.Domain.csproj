@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <InternalsVisible Include="MediaPlayerWithTest.Tests"/>
+  </ItemGroup>
+
 </Project>

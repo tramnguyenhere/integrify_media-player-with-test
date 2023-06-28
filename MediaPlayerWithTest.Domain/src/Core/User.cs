@@ -7,7 +7,7 @@ namespace MediaPlayerWithTest.src.Domain.Core
 
         public string Name { get; set; } = string.Empty;
 
-        private User(){}
+        private User() { }
 
         public static User Instance => lazyInstance.Value;
 
@@ -26,7 +26,7 @@ namespace MediaPlayerWithTest.src.Domain.Core
             if (_lists.Contains(list))
                 list.EmptyList(GetId);
             else
-                throw new ArgumentNullException("Playlist is not found");
+                throw new ArgumentNullException(nameof(list), "Playlist is not found");
         }
     }
 }
