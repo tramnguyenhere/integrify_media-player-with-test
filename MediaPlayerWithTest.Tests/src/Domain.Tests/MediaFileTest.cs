@@ -5,7 +5,7 @@ namespace MediaPlayerWithTest.Tests.src.Domain.Tests
     public class MediaFileTest
     {
         [Fact]
-        public void PlayShouldStartPlayback()
+        public void Play_ShouldStartPlayback()
         {
             var testFile = new MediaFile(
                 "audio1.mp3",
@@ -19,7 +19,7 @@ namespace MediaPlayerWithTest.Tests.src.Domain.Tests
         }
 
         [Fact]
-        public void PauseShouldPausePlayback()
+        public void Pause_ShouldPausePlayback()
         {
             var testFile = new MediaFile(
                 "audio1.mp3",
@@ -48,7 +48,7 @@ namespace MediaPlayerWithTest.Tests.src.Domain.Tests
         }
 
         [Fact]
-        public void SpeedSetterShouldUpdateSpeedAndRestartPlayback()
+        public void SpeedSetter_ShouldUpdateSpeed_AndRestartPlayback()
         {
             var testFile = new MediaFile(
                 "sample.mp3",
@@ -66,7 +66,7 @@ namespace MediaPlayerWithTest.Tests.src.Domain.Tests
         [Theory]
         [InlineData(0.1)]
         [InlineData(3.5)]
-        public void SpeedSetterWithInvalidSpeedShouldThrowArgumentException(double speed)
+        public void SpeedSetterWithInvalidSpeed_ShouldThrowArgumentException(double speed)
         {
             var testFile = new MediaFile(
                 "sample.mp3",
