@@ -10,10 +10,10 @@ namespace MediaPlayerWithTest.src.Business.Sevice
 
         public MediaService(IMediaRepository mediaRepository)
         {
-            _mediaRepository = mediaRepository; 
+            _mediaRepository = mediaRepository;
         }
 
-        public void CreateNewFile(string fileName, string filePath, TimeSpan duration)
+        public MediaFile CreateNewFile(string fileName, string filePath, TimeSpan duration)
         {
             if (string.IsNullOrEmpty(fileName))
             {
@@ -24,13 +24,15 @@ namespace MediaPlayerWithTest.src.Business.Sevice
             {
                 ErrorHandler.HandleFileError("File path cannot be empty");
             }
-
             _mediaRepository.CreateNewFile(fileName, filePath, duration);
+
+            return new MediaFile(fileName, filePath, duration);
         }
 
         public void DeleteFileById(int id)
         {
-            if(id < 0) {
+            if (id < 0)
+            {
                 ErrorHandler.HandleFileError("Id is invalid");
             }
 
@@ -44,7 +46,8 @@ namespace MediaPlayerWithTest.src.Business.Sevice
 
         public void GetFileById(int id)
         {
-            if(id < 0) {
+            if (id < 0)
+            {
                 ErrorHandler.HandleFileError("Id is invalid");
             }
 
