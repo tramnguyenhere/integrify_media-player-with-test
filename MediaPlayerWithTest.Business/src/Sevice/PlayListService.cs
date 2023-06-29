@@ -14,19 +14,16 @@ public class PlayListService : IPlayListService
 
     public bool AddNewFile(int playListId, int fileId, int userId)
     {
-        _playList.AddNewFile(playListId, fileId, userId);
-        return true;
+        return _playList.AddNewFile(playListId, fileId, userId);
     }
 
     public bool EmptyList(int playListId, int userId)
     {
-        _playList.EmptyList(playListId, userId);
-        return true;
+        return _playList.EmptyList(playListId, userId);
     }
 
     public bool RemoveFile(int playListId, int fileId, int userId)
     {
-        _playList.RemoveFile(playListId, fileId, userId);
-        return true;
+        return _playList.RemoveFile(playListId, fileId, userId);
     }
 }

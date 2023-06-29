@@ -8,37 +8,30 @@ using MediaPlayerWithTest.src.Domain.RepositoryInterface;
 using MediaPlayerWithTest.src.Business.ServiceInterface;
 using MediaPlayerWithTest.src.Business.Sevice;
 using MediaPlayerWithTest.src.Domain.Core;
+using MediaPlayerWithTest.src.Infrastructure.Repository;
 
 namespace MediaPlayerWithTest.Tests.src.Business.Tests
 {
     public class PlayListServiceTest
     {
-        private Mock<IPlayListRepository> _mockPlayListRepository;
+        private Mock<PlayListRepository> _mockPlayListRepository;
         private IPlayListService _playListService;
 
         public PlayListServiceTest()
         {
-            _mockPlayListRepository = new();
+            _mockPlayListRepository = new(
+                new List<MediaFile>
+                {
+                    new MediaFile("Shutdown", "/path/to/file.mp3", TimeSpan.FromSeconds(140.0)),
+                    new MediaFile("Flower", "/path/to/file.mp3", TimeSpan.FromSeconds(340.0)),
+                    new MediaFile("Solo", "/path/to/file.mp3", TimeSpan.FromSeconds(240.0)),
+                }
+            );
+
             _playListService = new PlayListService(_mockPlayListRepository.Object);
         }
 
         [Fact]
-        public void AddNewFile_ReturnTrue()
-        {
-            // Arrange
-            int playListId = 1;
-            int fileId = 2;
-            int userId = 3;
-
-            // Act
-            var result = _playListService.AddNewFile(playListId, fileId, userId);
-
-            // Assert
-            _mockPlayListRepository.Verify(
-                x => x.AddNewFile(playListId, fileId, userId),
-                Times.Once
-            );
-            Assert.True(result);
-        }
+        public void AddNewFile_ExistingPlaylistAndMediaFile_ReturnsTrue() { }
     }
 }

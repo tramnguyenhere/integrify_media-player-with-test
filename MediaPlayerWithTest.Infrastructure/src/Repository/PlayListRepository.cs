@@ -7,18 +7,18 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
 {
     public class PlayListRepository : IPlayListRepository
     {
-        private readonly List<PlayList> _playlistRepository;
+        private readonly List<PlayList> _playLists;
         private readonly List<MediaFile> _mediaFiles;
 
         public PlayListRepository(List<MediaFile> mediaFiles)
         {
-            _playlistRepository = new();
+            _playLists = new();
             _mediaFiles = mediaFiles;
         }
 
         public bool AddNewFile(int playListId, int fileId, int userId)
         {
-            var playlist = _playlistRepository.FirstOrDefault(p => p.GetId == playListId);
+            var playlist = _playLists.FirstOrDefault(p => p.GetId == playListId);
 
             if (playlist != null)
             {
@@ -42,7 +42,7 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
 
         public bool EmptyList(int playListId, int userId)
         {
-            var playlist = _playlistRepository.FirstOrDefault(p => p.GetId == playListId);
+            var playlist = _playLists.FirstOrDefault(p => p.GetId == playListId);
 
             if (playlist != null)
             {
@@ -58,7 +58,7 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
 
         public bool RemoveFile(int playListId, int fileId, int userId)
         {
-            var playlist = _playlistRepository.FirstOrDefault(p => p.GetId == playListId);
+            var playlist = _playLists.FirstOrDefault(p => p.GetId == playListId);
 
             if (playlist != null)
             {

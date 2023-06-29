@@ -27,6 +27,7 @@
     <ProjectReference Include="..\MediaPlayerWithTest.Domain\MediaPlayerWithTest.Domain.csproj" />
     <ProjectReference Include="..\MediaPlayerWithTest.Business\MediaPlayerWithTest.Business.csproj" />
     <ProjectReference Include="..\MediaPlayerWithTest.Application\MediaPlayerWithTest.Application.csproj" />
+    <ProjectReference Include="..\MediaPlayerWithTest.Infrastructure\MediaPlayerWithTest.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>
