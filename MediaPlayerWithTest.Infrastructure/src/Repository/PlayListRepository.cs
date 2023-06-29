@@ -16,7 +16,7 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
             _mediaFiles = mediaFiles;
         }
 
-        public PlayList AddNewFile(int playListId, int fileId, int userId)
+        public bool AddNewFile(int playListId, int fileId, int userId)
         {
             var playlist = _playlistRepository.FirstOrDefault(p => p.GetId == playListId);
 
@@ -27,7 +27,7 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
                 if (mediaFile != null)
                 {
                     playlist.AddNewFile(mediaFile, userId);
-                    return playlist;
+                    return true;
                 }
                 else
                 {

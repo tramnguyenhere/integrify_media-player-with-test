@@ -29,29 +29,31 @@ namespace MediaPlayerWithTest.src.Business.Sevice
             return new MediaFile(fileName, filePath, duration);
         }
 
-        public void DeleteFileById(int id)
+        public bool DeleteFileById(int id)
         {
             if (id < 0)
             {
                 ErrorHandler.HandleFileError("Id is invalid");
+                return false;
             }
 
             _mediaRepository.DeleteFileById(id);
+            return true;
         }
 
-        public void GetAllFiles()
+        public List<MediaFile> GetAllFiles()
         {
-            _mediaRepository.GetAllFiles();
+            return _mediaRepository.GetAllFiles();
         }
 
-        public void GetFileById(int id)
+        public MediaFile GetFileById(int id)
         {
             if (id < 0)
             {
                 ErrorHandler.HandleFileError("Id is invalid");
             }
 
-            _mediaRepository.GetFileById(id);
+            return _mediaRepository.GetFileById(id);
         }
     }
 }

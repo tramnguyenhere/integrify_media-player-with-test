@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <InternalsVisible Include="MediaPlayerWithTest.Tests"/>
+    <InternalsVisibleTo Include="MediaPlayerWithTest.Tests" />
   </ItemGroup>
 
 </Project>

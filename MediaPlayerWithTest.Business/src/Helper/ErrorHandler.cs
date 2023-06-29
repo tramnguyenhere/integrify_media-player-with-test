@@ -6,7 +6,7 @@ namespace MediaPlayerWithTest.src.Business
     {
         public static Exception HandleFileError(string message)
         {
-            throw new ArgumentException(message);
+            throw new Exception(message);
         }
 
         public static Exception HandleErrorInDatabase(string message)

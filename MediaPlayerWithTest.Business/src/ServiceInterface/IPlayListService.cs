@@ -2,8 +2,8 @@ namespace MediaPlayerWithTest.src.Business.ServiceInterface
 {
     public interface IPlayListService
     {
-        void AddNewFile(int playListId, int fileId, int userId);
-        void RemoveFile(int playListId, int fileId, int userId);
-        void EmptyList(int playListId, int userId);
+        public bool AddNewFile(int playListId, int fileId, int userId);
+        public bool RemoveFile(int playListId, int fileId, int userId);
+        public bool EmptyList(int playListId, int userId);
     }
 }

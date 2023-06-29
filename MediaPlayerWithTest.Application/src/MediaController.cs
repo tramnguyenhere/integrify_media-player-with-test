@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediaPlayerWithTest.src.Business.ServiceInterface;
+using MediaPlayerWithTest.src.Domain.Core;
 
 namespace MediaPlayerWithTest.src.Application
 {
@@ -15,24 +16,24 @@ namespace MediaPlayerWithTest.src.Application
             _mediaService = mediaService;
         }
 
-        public void CreateNewFile(string fileName, string filePath, TimeSpan duration)
+        public MediaFile CreateNewFile(string fileName, string filePath, TimeSpan duration)
         {
-            _mediaService.CreateNewFile(fileName, filePath, duration);
+            return _mediaService.CreateNewFile(fileName, filePath, duration);
         }
 
-        public void DeleteFileById(int id)
+        public bool DeleteFileById(int id)
         {
-            _mediaService.DeleteFileById(id);
+            return _mediaService.DeleteFileById(id);
         }
 
-        public void GetAllFiles()
+        public List<MediaFile> GetAllFiles()
         {
-            _mediaService.GetAllFiles();
+            return _mediaService.GetAllFiles();
         }
 
-        public void GetFileById(int id)
+        public MediaFile GetFileById(int id)
         {
-            _mediaService.GetFileById(id);
+            return _mediaService.GetFileById(id);
         }
     }
 }

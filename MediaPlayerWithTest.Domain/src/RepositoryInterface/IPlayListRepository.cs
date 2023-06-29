@@ -4,7 +4,7 @@ namespace MediaPlayerWithTest.src.Domain.RepositoryInterface
 {
     public interface IPlayListRepository
     {
-        public PlayList AddNewFile(int playListId, int fileId, int userId);
+        public bool AddNewFile(int playListId, int fileId, int userId);
         public bool RemoveFile(int playListId, int fileId, int userId);
         public bool EmptyList(int playListId, int userId);
     }

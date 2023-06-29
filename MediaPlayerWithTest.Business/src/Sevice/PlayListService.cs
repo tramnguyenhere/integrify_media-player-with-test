@@ -2,6 +2,7 @@ using MediaPlayerWithTest.src.Business.ServiceInterface;
 using MediaPlayerWithTest.src.Domain.RepositoryInterface;
 
 namespace MediaPlayerWithTest.src.Business.Sevice;
+
 public class PlayListService : IPlayListService
 {
     private readonly IPlayListRepository _playList;
@@ -10,18 +11,22 @@ public class PlayListService : IPlayListService
     {
         _playList = playList;
     }
-    public void AddNewFile(int playListId, int fileId, int userId)
+
+    public bool AddNewFile(int playListId, int fileId, int userId)
     {
         _playList.AddNewFile(playListId, fileId, userId);
+        return true;
     }
 
-    public void EmptyList(int playListId, int userId)
+    public bool EmptyList(int playListId, int userId)
     {
         _playList.EmptyList(playListId, userId);
+        return true;
     }
 
-    public void RemoveFile(int playListId, int fileId, int userId)
+    public bool RemoveFile(int playListId, int fileId, int userId)
     {
         _playList.RemoveFile(playListId, fileId, userId);
+        return true;
     }
 }

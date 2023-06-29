@@ -1,6 +1,6 @@
 namespace MediaPlayerWithTest.src.Domain.Core
 {
-    public class PlayList: BaseEntity
+    public class PlayList : BaseEntity
     {
         private readonly List<MediaFile> _files = new();
         private readonly int _userId;
@@ -33,7 +33,8 @@ namespace MediaPlayerWithTest.src.Domain.Core
 
         private bool CheckUserId(int userId)
         {
-            if (userId == _userId) return true;
+            if (userId == _userId)
+                return true;
             return false;
         }
     }
