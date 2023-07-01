@@ -8,12 +8,12 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
     public class PlayListRepository : IPlayListRepository
     {
         private readonly List<PlayList> _playLists;
-        private readonly List<MediaFile> _mediaFiles;
+        private readonly IMediaRepository _mediaFileRepository;
 
-        public PlayListRepository(List<MediaFile> mediaFiles)
+        public PlayListRepository(IMediaRepository mediaFileRepository)
         {
             _playLists = new();
-            _mediaFiles = mediaFiles;
+            _mediaFileRepository = mediaFileRepository;
         }
 
         public bool AddNewFile(int playListId, int fileId, int userId)
@@ -22,12 +22,11 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
 
             if (playlist != null)
             {
-                var mediaFile = _mediaFiles.FirstOrDefault(f => f.GetId == fileId);
+                var mediaFile =_mediaFileRepository.GetFileById(fileId);
 
                 if (mediaFile != null)
                 {
-                    playlist.AddNewFile(mediaFile, userId);
-                    return true;
+                    return playlist.AddNewFile(mediaFile, userId);
                 }
                 else
                 {
@@ -62,7 +61,7 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
 
             if (playlist != null)
             {
-                var mediaFile = _mediaFiles.FirstOrDefault(f => f.GetId == fileId);
+                var mediaFile = _mediaFileRepository.GetFileById(fileId);
 
                 if (mediaFile != null)
                 {

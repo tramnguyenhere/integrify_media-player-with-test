@@ -14,12 +14,11 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
             _mediaFiles = new();
         }
 
-        public MediaFile CreateNewFile(string fileName, string filePath, TimeSpan duration)
+        public bool CreateNewFile(string fileName, string filePath, TimeSpan duration)
         {
             var newMediaFile = new MediaFile(fileName, filePath, duration);
             _mediaFiles.Add(newMediaFile);
-
-            return newMediaFile;
+            return true;
         }
 
         public bool DeleteFileById(int fileId)
