@@ -53,7 +53,7 @@ internal class Program
 
         /* User */
         userController.AddNewUser("Tram Nguyen");
-        Console.WriteLine("User information");
-        Console.WriteLine(".......");
+        userController.AddNewUser("John Doe");
+        userController.GetAllList(2);
     }
 }

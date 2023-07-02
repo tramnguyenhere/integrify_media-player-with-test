@@ -29,8 +29,14 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
         public User AddNewUser(string name)
         {
             var user = new User(name);
-            _users.Add(user);
-            return user;
+
+            if(_users.Any(user => user.Name == name)) {
+                throw new Exception("username is available");
+            } else {
+                _users.Add(user);
+                Console.WriteLine("User added successfully!");
+                return user;
+            }
         }
 
         public void EmptyOneList(int listId, int userId)
