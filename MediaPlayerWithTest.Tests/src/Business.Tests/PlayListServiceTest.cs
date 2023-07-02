@@ -14,7 +14,7 @@ namespace MediaPlayerWithTest.Tests.src.Business.Tests
 {
     public class PlayListServiceTest
     {
-        private Mock<PlayListRepository> _mockPlayListRepository;
+        private Mock<IPlayListRepository> _mockPlayListRepository;
         private IPlayListService _playListService;
 
         public PlayListServiceTest()
@@ -32,6 +32,19 @@ namespace MediaPlayerWithTest.Tests.src.Business.Tests
         }
 
         [Fact]
-        public void AddNewFile_ExistingPlaylistAndMediaFile_ReturnsTrue() { }
+        public void AddNewFile_ExistingPlaylistAndMediaFile_ReturnsTrue() 
+        {
+            int playListId = 1;
+            int fileId = 1;
+            int userId = 1;
+
+            _mockPlayListRepository.Setup(m => m.AddNewFile(playListId,fileId,userId));
+            bool result = _playListService.AddNewFile(playListId, fileId, userId);
+
+            _mockPlayListRepository.Verify(
+                x => x.AddNewFile(playListId,fileId,userId),
+                Times.Once()
+            ); 
+        }
     }
 }

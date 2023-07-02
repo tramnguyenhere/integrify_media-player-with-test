@@ -23,7 +23,7 @@ namespace MediaPlayerWithTest.Tests.src.Business.Tests
         }
 
         [Fact]
-        public void CreateNewFile_ValidData_ReturnNewMediaFile()
+        public void CreateNewFile_ValidData_ReturnTrue()
         {
             string fileName = "Hello";
             string filePath = "/path/to/file.mp3";
@@ -31,27 +31,30 @@ namespace MediaPlayerWithTest.Tests.src.Business.Tests
             MediaFile expectedMediaFile = new(fileName, filePath, duration);
             _mockMediaRepository.Setup(m => m.CreateNewFile(fileName, filePath, duration));
 
-            MediaFile newMediaFile = _mediaService.CreateNewFile(fileName, filePath, duration);
+            bool result = _mediaService.CreateNewFile(fileName, filePath, duration);
 
             _mockMediaRepository.Verify(
                 x => x.CreateNewFile(fileName, filePath, duration),
                 Times.Once()
             );
-            Assert.NotNull(newMediaFile);
-            Assert.Equal(expectedMediaFile.FileName, newMediaFile.FileName);
-            Assert.Equal(expectedMediaFile.FilePath, newMediaFile.FilePath);
-            Assert.Equal(expectedMediaFile.Duration, newMediaFile.Duration);
-        }
-
-        [Fact]
-        public void DeleteFileById_ValidId_ReturnTrue()
-        {
-            int id = 1;
-
-            bool result = _mediaService.DeleteFileById(id);
-
-            _mockMediaRepository.Verify(m => m.DeleteFileById(id), Times.Once);
             Assert.True(result);
+        }
+        [Fact]
+        public void DeleteFileById_ValidId_ReturnsTrue()
+        {
+            int fileId = 1;
+
+            _mockMediaRepository.Setup(m => m.GetFileById(fileId))
+                .Returns(new MediaFile("Hello", "/path/to/file.mp3", TimeSpan.FromSeconds(120.0)));
+
+            _mockMediaRepository.Setup(m => m.DeleteFileById(fileId))
+                .Returns(true);
+
+            bool result = _mediaService.DeleteFileById(fileId);
+
+            Assert.True(result);
+            _mockMediaRepository.Verify(m => m.GetFileById(fileId), Times.Once);
+            _mockMediaRepository.Verify(m => m.DeleteFileById(fileId), Times.Once);
         }
 
         [Fact]
