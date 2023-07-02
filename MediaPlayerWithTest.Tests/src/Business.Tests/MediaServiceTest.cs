@@ -39,16 +39,17 @@ namespace MediaPlayerWithTest.Tests.src.Business.Tests
             );
             Assert.True(result);
         }
+
         [Fact]
         public void DeleteFileById_ValidId_ReturnsTrue()
         {
             int fileId = 1;
 
-            _mockMediaRepository.Setup(m => m.GetFileById(fileId))
+            _mockMediaRepository
+                .Setup(m => m.GetFileById(fileId))
                 .Returns(new MediaFile("Hello", "/path/to/file.mp3", TimeSpan.FromSeconds(120.0)));
 
-            _mockMediaRepository.Setup(m => m.DeleteFileById(fileId))
-                .Returns(true);
+            _mockMediaRepository.Setup(m => m.DeleteFileById(fileId)).Returns(true);
 
             bool result = _mediaService.DeleteFileById(fileId);
 
