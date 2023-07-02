@@ -13,10 +13,11 @@ namespace MediaPlayerWithTest.src.Domain.Core
             _userId = userId;
         }
 
-        public void AddNewFile(MediaFile file, int userId)
+        public bool AddNewFile(MediaFile file, int userId)
         {
             if (CheckUserId(userId))
                 _files.Add(file);
+            return true;
         }
 
         public void RemoveFile(MediaFile file, int userId)
@@ -36,6 +37,11 @@ namespace MediaPlayerWithTest.src.Domain.Core
             if (userId == _userId)
                 return true;
             return false;
+        }
+
+        public override string ToString()
+        {
+            return $"Id: {GetId}, UserId: {_userId}, Number of playlists: {_files.Count}";
         }
     }
 }

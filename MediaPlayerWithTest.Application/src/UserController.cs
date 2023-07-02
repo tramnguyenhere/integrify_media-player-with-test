@@ -1,4 +1,5 @@
 using MediaPlayerWithTest.src.Business.ServiceInterface;
+using MediaPlayerWithTest.src.Domain.Core;
 
 namespace MediaPlayerWithTest.src.Application
 {
@@ -11,6 +12,14 @@ namespace MediaPlayerWithTest.src.Application
             _userService = userService;
         }
 
+        public List<User> GetAllUsers() {
+            return _userService.GetAllUsers();
+        }
+
+        public User AddNewUser(string name) {
+            return _userService.AddNewUser(name);
+        }
+
         public void AddNewList(string name, int userId)
         {
             _userService.AddNewList(name, userId);
@@ -21,14 +30,14 @@ namespace MediaPlayerWithTest.src.Application
             _userService.EmptyOneList(listId, userId);
         }
 
-        public void GetAllList(int userId)
+        public List<PlayList> GetAllList(int userId)
         {
-            _userService.GetAllList(userId);
+            return _userService.GetAllList(userId);
         }
 
-        public void GetListById(int listId)
+        public PlayList GetListById(int listId)
         {
-            _userService.GetListById(listId);
+            return _userService.GetListById(listId);
         }
 
         public void RemoveAllLists(int userId)

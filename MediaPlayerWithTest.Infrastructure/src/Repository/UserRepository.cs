@@ -16,6 +16,10 @@ namespace MediaPlayerWithTest.src.Infrastructure.Repository
             _users = new();
         }
 
+        public List<User> GetAllUsers() {
+            return _users;
+        }
+
         public void AddNewList(string name, int userId)
         {
             var user = _users.FirstOrDefault(user => user.GetId == userId);

@@ -16,7 +16,7 @@ namespace MediaPlayerWithTest.src.Application
             _mediaService = mediaService;
         }
 
-        public MediaFile CreateNewFile(string fileName, string filePath, TimeSpan duration)
+        public bool CreateNewFile(string fileName, string filePath, TimeSpan duration)
         {
             return _mediaService.CreateNewFile(fileName, filePath, duration);
         }

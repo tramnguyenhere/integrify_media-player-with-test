@@ -5,7 +5,7 @@ using MediaPlayerWithTest.src.Infrastructure.Repository;
 
 internal class Program
 {
-    private static void Main(string[] args)
+    private static void Main()
     {
         // how client interact with application - via controllers
         var userRepository = new UserRepository();
@@ -54,6 +54,23 @@ internal class Program
         /* User */
         userController.AddNewUser("Tram Nguyen");
         userController.AddNewUser("John Doe");
-        userController.GetAllList(2);
+        
+        // Check method GetAllUsersas
+        Console.WriteLine("Method: GetAllUsersas");
+        Console.WriteLine(".......");
+        foreach(var user in userController.GetAllUsers()) {
+            Console.WriteLine(user);
+        }
+
+        // Check method AddNewList
+        Console.WriteLine("Method: AddNewList");
+        Console.WriteLine(".......");
+        userController.AddNewList("Kpop", 2);
+        userController.AddNewList("CPop", 2);
+        userController.AddNewList("Happy songs", 3);
+
+        foreach(var user in userController.GetAllUsers()) {
+            Console.WriteLine(user);
+        }
     }
 }

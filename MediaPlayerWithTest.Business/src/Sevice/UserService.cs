@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using MediaPlayerWithTest.src.Business.ServiceInterface;
+using MediaPlayerWithTest.src.Domain.Core;
 using MediaPlayerWithTest.src.Domain.RepositoryInterface;
 
 namespace MediaPlayerWithTest.src.Business.Sevice
@@ -16,9 +17,16 @@ namespace MediaPlayerWithTest.src.Business.Sevice
             _userRepository = userRepository;
         }
 
+        public User AddNewUser(string name)
+        {
+            return _userRepository.AddNewUser(name);
+        }
+
+
         public void AddNewList(string name, int userId)
         {
             _userRepository.AddNewList(name, userId);
+            Console.WriteLine($"Playlist \"{name}\" added successfully!");
         }
 
         public void EmptyOneList(int listId, int userId)
@@ -26,14 +34,14 @@ namespace MediaPlayerWithTest.src.Business.Sevice
             _userRepository.EmptyOneList(listId, userId);
         }
 
-        public void GetAllList(int userId)
+        public List<PlayList> GetAllList(int userId)
         {
-            _userRepository.GetAllList(userId);
+            return _userRepository.GetAllList(userId);
         }
 
-        public void GetListById(int listId)
+        public PlayList GetListById(int listId)
         {
-            _userRepository.GetListById(listId);
+            return _userRepository.GetListById(listId);
         }
 
         public void RemoveAllLists(int userId)
@@ -44,6 +52,11 @@ namespace MediaPlayerWithTest.src.Business.Sevice
         public void RemoveOneList(int listId, int userId)
         {
             _userRepository.RemoveOneList(listId, userId);
+        }
+
+        public List<User> GetAllUsers()
+        {
+            return _userRepository.GetAllUsers();
         }
     }
 }

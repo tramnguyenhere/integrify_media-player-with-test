@@ -53,7 +53,6 @@ namespace MediaPlayerWithTest.src.Domain.Core
             if (!_isPlaying)
             {
                 _isPlaying = true;
-                Console.WriteLine("Playing...");
 
                 // Start a timer to increase the current position every second
                 _timer = new Timer(UpdatePosition, null, TimeSpan.Zero, TimeSpan.FromSeconds(1));
@@ -65,7 +64,6 @@ namespace MediaPlayerWithTest.src.Domain.Core
             if (_isPlaying)
             {
                 _isPlaying = false;
-                Console.WriteLine("Paused.");
 
                 // Stop the timer when pausing the playback
                 _timer?.Change(Timeout.Infinite, Timeout.Infinite);
@@ -77,7 +75,6 @@ namespace MediaPlayerWithTest.src.Domain.Core
             if (_isPlaying)
             {
                 _isPlaying = false;
-                Console.WriteLine("Stopped.");
 
                 // Stop the timer and reset the current position
                 _timer?.Change(Timeout.Infinite, Timeout.Infinite);
@@ -106,7 +103,7 @@ namespace MediaPlayerWithTest.src.Domain.Core
 
         public override string ToString()
         {
-            return $"Name: {FileName}, Path: {FilePath}, Duration: {Duration}";
+            return $"Id: {GetId}, Name: {FileName}, Path: {FilePath}, Duration: {Duration}";
         }
     }
 }

@@ -2,31 +2,38 @@ namespace MediaPlayerWithTest.src.Domain.Core
 {
     public class User : BaseEntity
     {
-        private readonly List<PlayList> _lists = new();
-        private static readonly Lazy<User> lazyInstance = new(() => new User());
+        public List<PlayList> Lists;
 
-        public string Name { get; set; } = string.Empty;
+        public string Name { get; set; }
 
-        private User() { }
-
-        public static User Instance => lazyInstance.Value;
-
-        public void AddNewList(PlayList list)
+        public User(string name)
         {
-            _lists.Add(list);
+            Name = name;
+            Lists = new();
+        }
+
+        public void AddNewList(string name, int userId)
+        {
+            var newList = new PlayList(name, userId);
+            Lists.Add(newList);
         }
 
         public void RemoveOneList(PlayList list)
         {
-            _lists.Remove(list);
+            Lists.Remove(list);
         }
 
         public void EmptyOneList(PlayList list)
         {
-            if (_lists.Contains(list))
+            if (Lists.Contains(list))
                 list.EmptyList(GetId);
             else
                 throw new ArgumentNullException(nameof(list), "Playlist is not found");
+        }
+
+        public override string ToString()
+        {
+            return $"Id: {GetId}, Name: {Name}, Number of playlists: {Lists.Count}";
         }
     }
 }

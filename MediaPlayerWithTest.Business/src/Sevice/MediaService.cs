@@ -13,20 +13,23 @@ namespace MediaPlayerWithTest.src.Business.Sevice
             _mediaRepository = mediaRepository;
         }
 
-        public MediaFile CreateNewFile(string fileName, string filePath, TimeSpan duration)
+        public bool CreateNewFile(string fileName, string filePath, TimeSpan duration)
         {
             if (string.IsNullOrEmpty(fileName))
             {
                 ErrorHandler.HandleFileError("File name cannot be empty");
+                return false;
             }
 
             if (string.IsNullOrEmpty(filePath))
             {
                 ErrorHandler.HandleFileError("File path cannot be empty");
+                return false;
             }
             _mediaRepository.CreateNewFile(fileName, filePath, duration);
-
-            return new MediaFile(fileName, filePath, duration);
+            Console.WriteLine($"\"{fileName}\" added successfully!");
+            
+            return true;
         }
 
         public bool DeleteFileById(int id)
@@ -37,8 +40,16 @@ namespace MediaPlayerWithTest.src.Business.Sevice
                 return false;
             }
 
-            _mediaRepository.DeleteFileById(id);
-            return true;
+            var toBeDeletedFile = _mediaRepository.GetFileById(id);
+
+            if (toBeDeletedFile != null) {
+                Console.WriteLine($"\"{toBeDeletedFile.FileName}\" deleted successfully");
+                return _mediaRepository.DeleteFileById(id);
+            } else {
+                ErrorHandler.HandleFileError("File not found");
+                return false;
+            }
+            
         }
 
         public List<MediaFile> GetAllFiles()
